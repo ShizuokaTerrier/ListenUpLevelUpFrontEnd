@@ -3,21 +3,24 @@
   margin: 0px;
   box-sizing: border-box;
 }
-
 .navbar {
-  background-color: white;
-  color: black;
+  background-color: rgb(50, 47, 47);
+  color: white;
   padding: 10px;
 }
-
 .navbar ul {
   display: flex;
-  width: 600px;
+  justify-content: flex-start;
   margin: 0px auto;
   font-size: 14px;
   list-style: none;
 }
-
 .navbar ul li {
   margin: 10px;
+}
+
+.navbar .logo {
+  width: 2rem;
+  filter: invert(100%);
+  margin-right: 10px;
 }
