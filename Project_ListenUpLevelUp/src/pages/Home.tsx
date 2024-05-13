@@ -1,5 +1,9 @@
 function Home() {
-  return <div>Home</div>;
+  return (
+    <>
+      <body className='min-h-screen bg-slate-50'></body>
+    </>
+  );
 }
 
 export default Home;
