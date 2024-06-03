@@ -5,20 +5,42 @@ import mainImage from '../assets/listening.png';
 function Navbar() {
   return (
     <div>
-      <nav className='navbar'>
-        <ul>
-          <img className='logo' src={mainImage} alt='' />
+      <nav className='p-5 bg-white shadow'>
+        <ul className='flex justify-between items-center'>
+          <Link to='/'>
+            <span>
+              <img className='h-10 inline' src={mainImage} alt='' />
+            </span>
+          </Link>
+
           <li>
-            <Link to='/'>Home</Link>
+            <Link className='text-xl hover:text-cyan-500 duration-500' to='/'>
+              Home
+            </Link>
           </li>
           <li>
-            <Link to='/about'>About</Link>
+            <Link
+              className='text-xl hover:text-cyan-500 duration-500'
+              to='/about'
+            >
+              About
+            </Link>
           </li>
           <li>
-            <Link to='/register'>Register</Link>
+            <Link
+              className='text-xl hover:text-cyan-500 duration-500'
+              to='/register'
+            >
+              Register
+            </Link>
           </li>
           <li>
-            <Link to='/login'>Login</Link>
+            <Link
+              className='text-xl hover:text-cyan-500 duration-500'
+              to='/login'
+            >
+              Login
+            </Link>
           </li>
         </ul>
       </nav>
