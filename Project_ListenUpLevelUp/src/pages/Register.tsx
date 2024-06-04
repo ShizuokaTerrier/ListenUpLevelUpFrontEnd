@@ -1,4 +1,18 @@
+import { useState } from 'react';
+
 function Register() {
+  // Register a new account
+
+  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  // handler functions for inputs
+
+  const handleUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  };
+
   return (
     <>
       <body className='min-h-screen bg-slate-50 flex justify-center items-center'>
@@ -18,6 +32,8 @@ function Register() {
                   Username
                 </label>
                 <input
+                  onChange={handleUsername}
+                  value={username}
                   className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                   type='text'
                   name=''
