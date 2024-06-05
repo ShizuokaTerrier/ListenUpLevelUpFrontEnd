@@ -1,16 +1,29 @@
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
+
+interface FormData {
+  username: string;
+  email: string;
+  password: string;
+}
 
 function Register() {
-  // Register a new account
+  const [formData, setFormData] = useState<FormData>({
+    username: '',
+    email: '',
+    password: '',
+  });
 
-  const [username, setUsername] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-  // handler functions for inputs
-
-  const handleUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    console.log('Form Submitted', formData);
   };
 
   return (
@@ -23,7 +36,7 @@ function Register() {
             </h3>
           </div>
           <div className=''>
-            <form action=''>
+            <form onSubmit={handleSubmit}>
               <div className=' mb-4'>
                 <label
                   className='block text-gray-700 text-sm font-bold mb-2'
@@ -32,11 +45,11 @@ function Register() {
                   Username
                 </label>
                 <input
-                  onChange={handleUsername}
-                  value={username}
+                  onChange={handleChange}
+                  value={formData.username}
+                  name='username'
                   className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                   type='text'
-                  name=''
                   id=''
                 />
               </div>
@@ -48,9 +61,11 @@ function Register() {
                   Email
                 </label>
                 <input
+                  onChange={handleChange}
+                  value={formData.email}
+                  name='email'
                   className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                   type='text'
-                  name=''
                   id=''
                 />
               </div>
@@ -62,14 +77,19 @@ function Register() {
                   Password
                 </label>
                 <input
+                  onChange={handleChange}
+                  value={formData.password}
+                  name='password'
                   className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                  type='text'
-                  name=''
+                  type='password'
                   id=''
                 />
               </div>
               <div className='flex justify-center'>
-                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
+                <button
+                  type='submit'
+                  className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                >
                   Register
                 </button>
               </div>
