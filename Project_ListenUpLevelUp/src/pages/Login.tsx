@@ -1,4 +1,25 @@
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { FormData } from '../interfaces/interfaces';
+
 function Login() {
+  const [formData, setFormData] = useState<FormData>({
+    username: '',
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    console.log('Form Submitted', formData);
+  };
   return (
     <>
       <body className='min-h-screen bg-slate-50 flex justify-center items-center'>
@@ -9,15 +30,18 @@ function Login() {
             </h3>
           </div>
           <div>
-            <form action=''>
+            <form onSubmit={handleSubmit}>
               <div className=' mb-4'>
                 <label
                   className=' block text-gray-700 text-sm font-bold mb-2'
                   htmlFor=''
                 >
-                  Username
+                  Email
                 </label>
                 <input
+                  onChange={handleChange}
+                  value={formData.email}
+                  name='email'
                   className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                   type='text'
                 />
@@ -30,12 +54,18 @@ function Login() {
                   Password
                 </label>
                 <input
+                  onChange={handleChange}
+                  value={formData.password}
+                  name='password'
                   className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                   type='password'
                 />
               </div>
               <div className='flex justify-center'>
-                <button className=' bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
+                <button
+                  type='submit'
+                  className=' bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                >
                   Login
                 </button>
               </div>

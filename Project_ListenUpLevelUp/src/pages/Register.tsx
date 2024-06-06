@@ -1,10 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-
-interface FormData {
-  username: string;
-  email: string;
-  password: string;
-}
+import { FormData } from '../interfaces/interfaces';
 
 function Register() {
   const [formData, setFormData] = useState<FormData>({
