@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import About from './pages/About';
 import Login from './pages/Login';
 import { Route, Routes } from 'react-router-dom';
+import Game from './pages/Game';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/about' element={<About />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/game' element={<Game />} />
       </Routes>
     </>
   );
