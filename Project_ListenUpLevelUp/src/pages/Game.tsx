@@ -12,6 +12,7 @@ function Game() {
     userScore: 0,
     clickCount: 0,
     answerArray: arrayOfPairs.map((pair) => pair[flipACoin()]),
+    buttonDisabler: arrayOfPairs.map(() => false),
   });
 
   function flipACoin() {
@@ -24,19 +25,20 @@ function Game() {
     speechSynthesis.speak(utterance);
   }
 
-  function answerCheck(
-    selectedAnswer: string,
-    index: number,
-    event: React.MouseEvent<HTMLButtonElement>
-  ) {
+  function answerCheck(selectedAnswer: string, index: number) {
+    const newButtonDisabler = [...currentGameData.buttonDisabler];
+    newButtonDisabler[index] = true;
     if (selectedAnswer === currentGameData.answerArray[index]) {
       setCurrentGameData((prevState) => ({
         ...prevState,
         userScore: prevState.userScore + 1,
+        buttonDisabler: newButtonDisabler,
       }));
-      event.currentTarget.disabled = true;
     } else {
-      event.currentTarget.disabled = true;
+      setCurrentGameData((prevState) => ({
+        ...prevState,
+        buttonDisabler: newButtonDisabler,
+      }));
     }
   }
 
@@ -70,10 +72,11 @@ function Game() {
                     <td className='px-2 flex justify-center items-center'>
                       <div className='flex rounded-full border  mx-auto bg-gradient-to-tr from-blue-200 via-blue-400 to-blue-600 p-1 shadow-lg leading-tight focus:outline-none focus:shadow-outline transform transition-transform duration-300 hover:scale-105'>
                         <button
-                          onClick={(e) => {
-                            answerCheck(item[0], index, e);
+                          onClick={() => {
+                            answerCheck(item[0], index);
                           }}
                           className='flex font-bold rounded-full px-3 py-2 text-black bg-white disabled:opacity-80 '
+                          disabled={currentGameData.buttonDisabler[index]}
                         >
                           {item[0]}
                         </button>
@@ -82,10 +85,11 @@ function Game() {
                     <td className='px-2 flex justify-center items-center'>
                       <div className='flex rounded-full border  mx-auto bg-gradient-to-tr from-blue-200 via-blue-400 to-blue-600 p-1 shadow-lg leading-tight focus:outline-none focus:shadow-outline transform transition-transform duration-300 hover:scale-105 '>
                         <button
-                          onClick={(e) => {
-                            answerCheck(item[1], index, e);
+                          onClick={() => {
+                            answerCheck(item[1], index);
                           }}
                           className='flex font-bold rounded-full px-3 py-2 text-black bg-white disabled:opacity-80 '
+                          disabled={currentGameData.buttonDisabler[index]}
                         >
                           {item[1]}
                         </button>
