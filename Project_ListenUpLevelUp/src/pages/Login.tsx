@@ -16,9 +16,23 @@ function Login() {
     }));
   };
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     console.log('Form Submitted', formData);
+    try {
+      const registerNewUser = await fetch('http://localhost:8000/login', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (!registerNewUser.ok) {
+        throw new Error('Attempt to log in user was unsuccessful');
+      }
+      const data = await registerNewUser.json();
+      console.log('User logged in successfuly', data);
+    } catch (error) {
+      console.error('Error logging in', error);
+    }
   };
   return (
     <>
