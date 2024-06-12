@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { FormData } from '../interfaces/interfaces';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [formData, setFormData] = useState<FormData>({
@@ -7,6 +8,7 @@ function Login() {
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -30,6 +32,7 @@ function Login() {
       }
       const data = await registerNewUser.json();
       console.log('User logged in successfuly', data);
+      navigate('/');
     } catch (error) {
       console.error('Error logging in', error);
     }
