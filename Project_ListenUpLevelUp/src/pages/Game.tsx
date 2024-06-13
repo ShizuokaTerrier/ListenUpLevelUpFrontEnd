@@ -10,7 +10,7 @@ function Game() {
 
   const [currentGameData, setCurrentGameData] = useState({
     userScore: 0,
-    clickCount: 0,
+    topScore: 0,
     answerArray: arrayOfPairs.map((pair) => pair[flipACoin()]),
     buttonDisabler: arrayOfPairs.map(() => false),
   });
@@ -26,22 +26,29 @@ function Game() {
   }
 
   function answerCheck(selectedAnswer: string, index: number) {
-    const newButtonDisabler = [...currentGameData.buttonDisabler];
-    newButtonDisabler[index] = true;
-    if (selectedAnswer === currentGameData.answerArray[index]) {
-      setCurrentGameData((prevState) => ({
-        ...prevState,
-        userScore: prevState.userScore + 1,
-        buttonDisabler: newButtonDisabler,
-      }));
-    } else {
-      setCurrentGameData((prevState) => ({
-        ...prevState,
-        buttonDisabler: newButtonDisabler,
-      }));
-    }
-  }
+    setCurrentGameData((prevState) => {
+      const newButtonDisabler = [...prevState.buttonDisabler];
+      newButtonDisabler[index] = true;
 
+      let newUserScore = prevState.userScore;
+      if (selectedAnswer === prevState.answerArray[index]) {
+        newUserScore += 1;
+      }
+
+      let newTopScore = prevState.topScore;
+      if (newUserScore > prevState.topScore) {
+        newTopScore = newUserScore;
+      }
+
+      return {
+        ...prevState,
+        userScore: newUserScore,
+        topScore: newTopScore,
+        buttonDisabler: newButtonDisabler,
+      };
+    });
+  }
+  console.log('After a rerender', currentGameData);
   return (
     <>
       <div className='min-h-screen bg-slate-50 flex justify-center items-center'>
