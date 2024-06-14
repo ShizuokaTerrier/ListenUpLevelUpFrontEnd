@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { FormData } from '../interfaces/interfaces';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
   const [formData, setFormData] = useState<FormData>({
@@ -7,6 +8,8 @@ function Register() {
     email: '',
     password: '',
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -30,6 +33,7 @@ function Register() {
       }
       const data = await registerNewUser.json();
       console.log('User registered successfuly', data);
+      navigate('/');
     } catch (error) {
       console.error('Error registering new user', error);
     }
