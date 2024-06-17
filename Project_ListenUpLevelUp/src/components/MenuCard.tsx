@@ -5,7 +5,7 @@ const MenuCard: React.FC<{ menuCardProps: MenuCardProps }> = ({
 }) => {
   return (
     <div>
-      <div className=' max-w-sm rounded overflow-hidden shadow-lg m-2'>
+      <div className=' max-w-sm rounded-3xl overflow-hidden shadow-lg m-2 hover:scale-105 hover:text-cyan-500 duration-500 hover:shadow-lg'>
         <img src='' alt='' />
         <div className='px-6 py-4'>
           <h3 className=' font-bold text-xl mb-2 text-center'>
