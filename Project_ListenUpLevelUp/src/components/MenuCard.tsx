@@ -1,16 +1,17 @@
 import { MenuCardProps } from '../interfaces/interfaces';
+import { Link } from 'react-router-dom';
 
-const MenuCard: React.FC<{ menuCardProps: MenuCardProps }> = ({
-  menuCardProps,
-}) => {
+const MenuCard = ({ menuCardProps }: MenuCardProps) => {
   return (
     <div>
       <div className=' max-w-sm rounded-3xl overflow-hidden shadow-lg m-2 hover:scale-105 hover:text-cyan-500 duration-500 hover:shadow-lg'>
         <img src='' alt='' />
         <div className='px-6 py-4'>
-          <h3 className=' font-bold text-xl mb-2 text-center'>
-            {menuCardProps.header}
-          </h3>
+          <Link to={menuCardProps.link}>
+            <h3 className=' font-bold text-xl mb-2 text-center'>
+              {menuCardProps.header}
+            </h3>
+          </Link>
           <p className=' text-gray-700 text-base text-center'>
             {menuCardProps.lineOne} <br /> {menuCardProps.lineTwo}
           </p>

@@ -5,7 +5,10 @@ export interface FormData {
 }
 
 export interface MenuCardProps {
-  header: string;
-  lineOne: string;
-  lineTwo: string;
+  menuCardProps: {
+    header: string;
+    lineOne: string;
+    lineTwo: string;
+    link: string;
+  };
 }
