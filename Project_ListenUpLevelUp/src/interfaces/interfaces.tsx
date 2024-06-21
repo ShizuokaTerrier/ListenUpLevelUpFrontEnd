@@ -12,3 +12,10 @@ export interface MenuCardProps {
     link: string;
   };
 }
+
+export interface CurrentGameData {
+  currentGameDataProps: {
+    userScore: number;
+    topScore: number;
+  };
+}

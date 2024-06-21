@@ -119,7 +119,12 @@ const MinimalPairs = () => {
           </div>
         </div>
       ) : (
-        <GameResult />
+        <GameResult
+          currentGameDataProps={{
+            userScore: currentGameData.userScore,
+            topScore: currentGameData.topScore,
+          }}
+        />
       )}
     </>
   );
