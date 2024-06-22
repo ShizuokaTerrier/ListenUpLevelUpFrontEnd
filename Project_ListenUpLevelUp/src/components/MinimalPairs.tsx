@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import GameResult from './GameResult';
+import { GameState } from '../interfaces/interfaces';
 
 const MinimalPairs = () => {
   const arrayOfPairs = [
@@ -9,7 +10,7 @@ const MinimalPairs = () => {
     ['Cub', 'Cup'],
   ];
 
-  const [currentGameData, setCurrentGameData] = useState({
+  const [currentGameData, setCurrentGameData] = useState<GameState>({
     userScore: 0,
     topScore: 0,
     clicks: 0,
@@ -19,6 +20,22 @@ const MinimalPairs = () => {
 
   function flipACoin() {
     return Math.floor(Math.random() * 2);
+  }
+
+  function resetGame() {
+    setCurrentGameData((prevState) => {
+      const resetScore = 0;
+      const resetClicks = 0;
+      const newAnswers = arrayOfPairs.map((pair) => pair[flipACoin()]);
+      const resetButtons = arrayOfPairs.map(() => false);
+      return {
+        ...prevState,
+        userScore: resetScore,
+        clicks: resetClicks,
+        answerArray: newAnswers,
+        buttonDisabler: resetButtons,
+      };
+    });
   }
 
   function playWord(word: string) {
@@ -120,10 +137,8 @@ const MinimalPairs = () => {
         </div>
       ) : (
         <GameResult
-          currentGameDataProps={{
-            userScore: currentGameData.userScore,
-            topScore: currentGameData.topScore,
-          }}
+          currentGameData={currentGameData}
+          resetFunction={resetGame}
         />
       )}
     </>

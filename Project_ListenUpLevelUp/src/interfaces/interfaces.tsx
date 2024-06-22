@@ -13,9 +13,15 @@ export interface MenuCardProps {
   };
 }
 
+export interface GameState {
+  userScore: number;
+  topScore: number;
+  clicks: number;
+  answerArray: string[];
+  buttonDisabler: boolean[];
+}
+
 export interface CurrentGameData {
-  currentGameDataProps: {
-    userScore: number;
-    topScore: number;
-  };
+  currentGameData: GameState;
+  resetFunction: () => void;
 }
