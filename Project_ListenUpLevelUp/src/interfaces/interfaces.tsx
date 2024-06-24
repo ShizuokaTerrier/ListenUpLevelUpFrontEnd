@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface FormData {
   username: string;
   email: string;
@@ -24,4 +26,8 @@ export interface GameState {
 export interface CurrentGameData {
   currentGameData: GameState;
   resetFunction: () => void;
+}
+
+export interface AuthProviderWithNavigateProps {
+  children: ReactNode;
 }

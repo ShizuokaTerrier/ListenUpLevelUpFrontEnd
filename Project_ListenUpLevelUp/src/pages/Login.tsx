@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { FormData } from '../interfaces/interfaces';
 import { useNavigate } from 'react-router-dom';
+import LoginButton from '../components/LoginButton';
 
 function Login() {
   const [formData, setFormData] = useState<FormData>({
@@ -39,6 +40,7 @@ function Login() {
   };
   return (
     <>
+      <LoginButton />
       <body className='min-h-screen bg-slate-50 flex justify-center items-center'>
         <div className='bg-white shadow-md rounded px-8 pt-4 pb-8 mb-4'>
           <div>

@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
 import '../App.css';
 import mainImage from '../assets/listening.png';
+import LoginButton from './LoginButton';
+import SignUpButton from './SignUpButton';
+import LogoutButton from './LogoutButton';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function Navbar() {
+  const { isAuthenticated } = useAuth0();
+  console.log(isAuthenticated);
   return (
     <div>
       <nav className='p-5 bg-white shadow'>
@@ -12,7 +18,6 @@ function Navbar() {
               <img className='h-10 inline' src={mainImage} alt='' />
             </span>
           </Link>
-
           <li>
             <Link className='text-xl hover:text-cyan-500 duration-500' to='/'>
               Home
@@ -27,20 +32,25 @@ function Navbar() {
             </Link>
           </li>
           <li>
-            <Link
-              className='text-xl hover:text-cyan-500 duration-500'
-              to='/register'
-            >
-              Register
-            </Link>
+            {!isAuthenticated && (
+              <>
+                <SignUpButton />
+              </>
+            )}
           </li>
           <li>
-            <Link
-              className='text-xl hover:text-cyan-500 duration-500'
-              to='/login'
-            >
-              Login
-            </Link>
+            {!isAuthenticated && (
+              <>
+                <LoginButton />
+              </>
+            )}
+          </li>
+          <li>
+            {isAuthenticated && (
+              <>
+                <LogoutButton />
+              </>
+            )}
           </li>
         </ul>
       </nav>

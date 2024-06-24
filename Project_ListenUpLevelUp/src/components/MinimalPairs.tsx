@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import GameResult from './GameResult';
 import { GameState } from '../interfaces/interfaces';
+import GameSelectionNavbar from './GameSelectionNavbar';
 
 const MinimalPairs = () => {
   const arrayOfPairs = [
@@ -71,6 +72,8 @@ const MinimalPairs = () => {
   }
   return (
     <>
+      <GameSelectionNavbar />
+      <div className='flex '></div>
       {currentGameData.clicks !== arrayOfPairs.length ? (
         <div className='min-h-screen bg-slate-50 flex justify-center items-center'>
           <div className='bg-white shadow-md rounded px-8 pt-4 pb-8 mb-4'>

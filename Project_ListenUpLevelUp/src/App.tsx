@@ -6,8 +6,22 @@ import About from './pages/About';
 import Login from './pages/Login';
 import { Route, Routes } from 'react-router-dom';
 import Game from './pages/Game';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function App() {
+  const { isLoading, isAuthenticated, user } = useAuth0();
+
+  if (isLoading) {
+    return (
+      <>
+        <h1>Loading</h1>
+      </>
+    );
+  }
+
+  console.log('Is authenticated', isAuthenticated);
+  console.log('User', user);
+
   return (
     <>
       <Navbar />

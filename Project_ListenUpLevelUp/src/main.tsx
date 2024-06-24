@@ -1,13 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot, Container } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
+import { Auth0ProviderWithNavigate } from './auth0-provider-with-navigate.tsx';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const container = document.getElementById('root') as Container;
+const root = createRoot(container);
+root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Auth0ProviderWithNavigate>
+        <App />
+      </Auth0ProviderWithNavigate>
     </BrowserRouter>
   </React.StrictMode>
 );
