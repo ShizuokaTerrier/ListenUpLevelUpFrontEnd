@@ -7,9 +7,10 @@ import Login from './pages/Login';
 import { Route, Routes } from 'react-router-dom';
 import Game from './pages/Game';
 import { useAuth0 } from '@auth0/auth0-react';
+import { AuthenticationGuard } from './components/AuthenticationGuard';
 
 function App() {
-  const { isLoading, isAuthenticated, user } = useAuth0();
+  const { isLoading, isAuthenticated, user, error } = useAuth0();
 
   if (isLoading) {
     return (
@@ -19,8 +20,16 @@ function App() {
     );
   }
 
+  if (error) {
+    return (
+      <>
+        <h1>error {error.message}</h1>
+      </>
+    );
+  }
+
   console.log('Is authenticated', isAuthenticated);
-  console.log('User', user);
+  console.log('User', user?.email);
 
   return (
     <>
@@ -30,7 +39,10 @@ function App() {
         <Route path='/about' element={<About />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/game' element={<Game />} />
+        <Route
+          path='/game'
+          element={<AuthenticationGuard component={Game} />}
+        />
       </Routes>
     </>
   );

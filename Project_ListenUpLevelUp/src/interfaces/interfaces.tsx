@@ -31,3 +31,7 @@ export interface CurrentGameData {
 export interface AuthProviderWithNavigateProps {
   children: ReactNode;
 }
+
+export interface AuthenticationGuardProps {
+  component: React.ComponentType<object>;
+}
