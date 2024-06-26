@@ -8,6 +8,7 @@ import { Route, Routes } from 'react-router-dom';
 import Game from './pages/Game';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AuthenticationGuard } from './components/AuthenticationGuard';
+import UserProfilePage from './pages/UserProfilePage';
 
 function App() {
   const { isLoading, isAuthenticated, user, error } = useAuth0();
@@ -42,6 +43,10 @@ function App() {
         <Route
           path='/game'
           element={<AuthenticationGuard component={Game} />}
+        />
+        <Route
+          path='/profile'
+          element={<AuthenticationGuard component={UserProfilePage} />}
         />
       </Routes>
     </>

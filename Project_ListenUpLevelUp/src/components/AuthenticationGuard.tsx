@@ -7,5 +7,6 @@ export const AuthenticationGuard = ({
   const Component = withAuthenticationRequired(component, {
     onRedirecting: () => <div>Page is Loading</div>,
   });
+
   return <Component />;
 };
