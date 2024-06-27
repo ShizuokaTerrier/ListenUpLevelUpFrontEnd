@@ -32,6 +32,16 @@ function Navbar() {
             </Link>
           </li>
           <li>
+            {isAuthenticated && (
+              <Link
+                className='text-xl hover:text-cyan-500 duration-500'
+                to='/profile'
+              >
+                Profile
+              </Link>
+            )}
+          </li>
+          <li>
             {!isAuthenticated && (
               <>
                 <SignUpButton />
