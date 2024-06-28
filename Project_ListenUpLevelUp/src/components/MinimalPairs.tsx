@@ -11,6 +11,12 @@ const MinimalPairs = () => {
     ['Cub', 'Cup'],
   ];
 
+  const arrayOfMinimalPairChoices = [
+    ['/b/ & /p/'],
+    ['/i:/ & /ɪ/'],
+    ['/ɪ/  & /ɪə/'],
+  ];
+
   const [currentGameData, setCurrentGameData] = useState<GameState>({
     userScore: 0,
     topScore: 0,
@@ -84,6 +90,16 @@ const MinimalPairs = () => {
             </div>
             <table className='w-full'>
               <tbody>
+                <select className='' name='' id=''>
+                  <option value=''>Please choose a pair to practice</option>
+                  {arrayOfMinimalPairChoices.map((item, index) => {
+                    return (
+                      <option value='' key={index}>
+                        {item}
+                      </option>
+                    );
+                  })}
+                </select>
                 {arrayOfPairs.map((item, index) => {
                   return (
                     <tr
