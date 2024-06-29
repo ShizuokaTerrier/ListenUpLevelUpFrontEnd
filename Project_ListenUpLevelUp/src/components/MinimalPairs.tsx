@@ -2,13 +2,18 @@ import { useState } from 'react';
 import GameResult from './GameResult';
 import { GameState } from '../interfaces/interfaces';
 import GameSelectionNavbar from './GameSelectionNavbar';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const MinimalPairs = () => {
+  const { user } = useAuth0();
+  const email = user?.email as string;
+
   const arrayOfPairs = [
     ['Bar', 'Pa'],
     ['Bear', 'Pear'],
     ['Bill', 'Pill'],
     ['Cub', 'Cup'],
+    ['Tab', 'Tap'],
   ];
 
   const arrayOfMinimalPairChoices = [
@@ -18,6 +23,7 @@ const MinimalPairs = () => {
   ];
 
   const [currentGameData, setCurrentGameData] = useState<GameState>({
+    userEmail: email,
     userScore: 0,
     topScore: 0,
     clicks: 0,
@@ -85,21 +91,31 @@ const MinimalPairs = () => {
           <div className='bg-white shadow-md rounded px-8 pt-4 pb-8 mb-4'>
             <div>
               <h3 className='flex justify-center items-center text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-400 to-blue-500 mb-4'>
-                Game Page
+                Minimal Pairs
               </h3>
             </div>
+            <label
+              htmlFor='minimalPairs'
+              className=' text-center block mb-2 text-sm font-medium text-gray-900'
+            >
+              Which pair will you practice?
+            </label>
+            <select
+              className=' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3'
+              name=''
+              id='minimalPairs'
+            >
+              <option value=''>Please choose a pair to practice</option>
+              {arrayOfMinimalPairChoices.map((item, index) => {
+                return (
+                  <option value='' key={index}>
+                    {item}
+                  </option>
+                );
+              })}
+            </select>
             <table className='w-full'>
               <tbody>
-                <select className='' name='' id=''>
-                  <option value=''>Please choose a pair to practice</option>
-                  {arrayOfMinimalPairChoices.map((item, index) => {
-                    return (
-                      <option value='' key={index}>
-                        {item}
-                      </option>
-                    );
-                  })}
-                </select>
                 {arrayOfPairs.map((item, index) => {
                   return (
                     <tr

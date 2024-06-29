@@ -16,6 +16,7 @@ export interface MenuCardProps {
 }
 
 export interface GameState {
+  userEmail: string;
   userScore: number;
   topScore: number;
   clicks: number;
