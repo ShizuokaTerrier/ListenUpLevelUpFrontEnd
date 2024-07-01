@@ -29,6 +29,14 @@ export interface CurrentGameData {
   resetFunction: () => void;
 }
 
+export interface AllScoresObjectInterface {
+  id: number;
+  value: number;
+  gameId: number;
+  userId: number;
+  createdAt: string;
+}
+
 export interface AuthProviderWithNavigateProps {
   children: ReactNode;
 }

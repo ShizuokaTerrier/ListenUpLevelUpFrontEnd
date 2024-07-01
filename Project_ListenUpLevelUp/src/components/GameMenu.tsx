@@ -1,4 +1,3 @@
-import AllScores from './AllScores';
 import MenuCard from './MenuCard';
 
 const GameMenu = () => {
@@ -64,7 +63,6 @@ const GameMenu = () => {
           }}
         />
       </div>
-      <AllScores />
     </div>
   );
 };

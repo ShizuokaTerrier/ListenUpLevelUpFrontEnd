@@ -3,6 +3,7 @@ import GameResult from './GameResult';
 import { GameState } from '../interfaces/interfaces';
 import GameSelectionNavbar from './GameSelectionNavbar';
 import { useAuth0 } from '@auth0/auth0-react';
+import AllScores from './AllScores';
 
 const MinimalPairs = () => {
   const { user } = useAuth0();
@@ -171,10 +172,13 @@ const MinimalPairs = () => {
           </div>
         </div>
       ) : (
-        <GameResult
-          currentGameData={currentGameData}
-          resetFunction={resetGame}
-        />
+        <div className='flex flex-col '>
+          <GameResult
+            currentGameData={currentGameData}
+            resetFunction={resetGame}
+          />
+          <AllScores />
+        </div>
       )}
     </>
   );
