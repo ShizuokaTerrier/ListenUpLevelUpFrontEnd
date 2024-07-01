@@ -24,8 +24,10 @@ function AllScores() {
   };
 
   useEffect(() => {
-    handleScores();
-  }, []);
+    if (accessToken) {
+      handleScores();
+    }
+  }, [accessToken]);
   console.log(accessToken);
   console.log(import.meta.env.VITE_APP_API_SERVER_URL);
   return <div>AllScores</div>;
