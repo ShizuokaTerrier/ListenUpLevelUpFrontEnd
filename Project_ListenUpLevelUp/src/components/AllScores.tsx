@@ -41,16 +41,22 @@ function AllScores() {
         <table>
           <tbody>
             <tr>
-              <th>Value</th>
-              <th>userId</th>
-              <th>Date</th>
+              <th className='m-2 px-3 py-4 text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-400 to-blue-500'>
+                Value
+              </th>
+              <th className='m-2 px-3 py-4 text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-400 to-blue-500'>
+                userId
+              </th>
+              <th className='m-2 px-3 py-4 text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-400 to-blue-500'>
+                Date
+              </th>
             </tr>
             {topScores.map((item) => {
               return (
                 <tr>
-                  <td>{item.value}</td>
-                  <td>{item.userId}</td>
-                  <td>{item.createdAt}</td>
+                  <td className='m-2 px-3 font-semibold'>{item.value}</td>
+                  <td className='m-2 px-3 font-semibold'>{item.userId}</td>
+                  <td className='m-2 px-3 font-semibold'>{item.createdAt}</td>
                 </tr>
               );
             })}

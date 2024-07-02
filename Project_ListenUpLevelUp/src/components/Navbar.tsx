@@ -8,7 +8,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 function Navbar() {
   const { isAuthenticated } = useAuth0();
-  console.log(isAuthenticated);
+
   return (
     <div>
       <nav className='p-5 bg-white shadow'>
