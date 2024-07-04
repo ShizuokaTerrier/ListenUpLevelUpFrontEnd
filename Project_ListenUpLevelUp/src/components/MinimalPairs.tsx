@@ -4,11 +4,15 @@ import { GameState } from '../interfaces/interfaces';
 import GameSelectionNavbar from './GameSelectionNavbar';
 import { useAuth0 } from '@auth0/auth0-react';
 import AllScores from './AllScores';
+import useAccessToken from '../custom_hooks/useAccessToken';
 
 const MinimalPairs = () => {
   const { user } = useAuth0();
   const email = user?.email as string;
+  const userId = Number(user?.sub?.slice(14));
 
+  const accessToken = useAccessToken();
+  console.log(accessToken);
   const arrayOfPairs = [
     ['Bar', 'Pa'],
     ['Bear', 'Pear'],
@@ -36,12 +40,35 @@ const MinimalPairs = () => {
     return Math.floor(Math.random() * 2);
   }
 
+  const updateScores = async () => {
+    if (accessToken) {
+      try {
+        const body = {
+          value: currentGameData.userScore,
+          gameId: 1,
+          userId: userId,
+        };
+        await fetch(`${import.meta.env.VITE_APP_API_SERVER_URL}scores`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify(body),
+        });
+        console.log('Update scores ran');
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   function resetGame() {
     setCurrentGameData((prevState) => {
       const resetScore = 0;
       const resetClicks = 0;
       const newAnswers = arrayOfPairs.map((pair) => pair[flipACoin()]);
       const resetButtons = arrayOfPairs.map(() => false);
+      updateScores();
       return {
         ...prevState,
         userScore: resetScore,
