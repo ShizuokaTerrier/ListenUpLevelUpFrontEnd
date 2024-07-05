@@ -9,7 +9,7 @@ import useAccessToken from '../custom_hooks/useAccessToken';
 const MinimalPairs = () => {
   const { user } = useAuth0();
   const email = user?.email as string;
-  const userId = Number(user?.sub?.slice(14));
+  const userId = user?.sub as string;
 
   const accessToken = useAccessToken();
   console.log(accessToken);
@@ -48,13 +48,23 @@ const MinimalPairs = () => {
           gameId: 1,
           userId: userId,
         };
-        await fetch(`${import.meta.env.VITE_APP_API_SERVER_URL}scores`, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify(body),
-        });
+        console.log('This is the body', body);
+        const response = await fetch(
+          `${import.meta.env.VITE_APP_API_SERVER_URL}scores`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${accessToken}`,
+            },
+            body: JSON.stringify(body),
+          }
+        );
+        if (!response.ok) {
+          console.error(`${response.status}`);
+        } else {
+          console.log('Successfully updated scores');
+        }
         console.log('Update scores ran');
       } catch (error) {
         console.error(error);
@@ -63,6 +73,7 @@ const MinimalPairs = () => {
   };
 
   function resetGame() {
+    updateScores();
     setCurrentGameData((prevState) => {
       const resetScore = 0;
       const resetClicks = 0;

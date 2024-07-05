@@ -33,7 +33,7 @@ export interface AllScoresObjectInterface {
   id: number;
   value: number;
   gameId: number;
-  userId: number;
+  userId: string;
   createdAt: string;
 }
 
