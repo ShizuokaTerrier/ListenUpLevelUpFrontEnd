@@ -66,10 +66,9 @@ function AllScores({ currentGameData }: CurrentGameData) {
     };
 
     if (accessToken) {
-      updateScores();
-      handleScores();
+      updateScores().then(handleScores);
     }
-  }, [accessToken]);
+  }, [accessToken, userId, currentGameData.userScore]);
   console.log(topScores);
   return (
     <div className='bg-slate-50 flex justify-center items-center p-10'>
