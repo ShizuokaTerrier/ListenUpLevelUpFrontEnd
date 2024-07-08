@@ -1,7 +1,9 @@
-import { CurrentGameData } from '../interfaces/interfaces';
+import { CurrentGameDataWithReset } from '../interfaces/interfaces';
 
-const GameResult = ({ currentGameData, resetFunction }: CurrentGameData) => {
-  console.log();
+const GameResult = ({
+  currentGameData,
+  resetFunction,
+}: CurrentGameDataWithReset) => {
   return (
     <div>
       <div className='bg-slate-50 flex justify-center items-center p-10'>

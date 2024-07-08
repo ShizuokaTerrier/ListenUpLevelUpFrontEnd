@@ -26,7 +26,14 @@ export interface GameState {
 
 export interface CurrentGameData {
   currentGameData: GameState;
+}
+
+export interface CurrentGameDataWithReset extends CurrentGameData {
   resetFunction: () => void;
+}
+
+export interface UpdateScoresFunction {
+  updateScoresFunction: () => void;
 }
 
 export interface AllScoresObjectInterface {

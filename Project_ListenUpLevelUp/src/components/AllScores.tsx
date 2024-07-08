@@ -1,13 +1,50 @@
 import { useEffect, useState } from 'react';
 import useAccessToken from '../custom_hooks/useAccessToken';
-import { AllScoresObjectInterface } from '../interfaces/interfaces';
+import {
+  AllScoresObjectInterface,
+  CurrentGameData,
+} from '../interfaces/interfaces';
+import { useAuth0 } from '@auth0/auth0-react';
 
-function AllScores() {
+function AllScores({ currentGameData }: CurrentGameData) {
   const accessToken = useAccessToken();
+  const { user } = useAuth0();
+  const userId = user?.sub as string;
 
   const [topScores, setTopScores] = useState<AllScoresObjectInterface[]>([]);
 
   useEffect(() => {
+    const updateScores = async () => {
+      if (accessToken) {
+        try {
+          const body = {
+            value: currentGameData.userScore,
+            gameId: 1,
+            userId: userId,
+          };
+          console.log('This is the body', body);
+          const response = await fetch(
+            `${import.meta.env.VITE_APP_API_SERVER_URL}scores`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`,
+              },
+              body: JSON.stringify(body),
+            }
+          );
+          if (!response.ok) {
+            console.error(`${response.status}`);
+          } else {
+            console.log('Successfully updates scores');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+
     const handleScores = async () => {
       try {
         const checkAllScores = await fetch(
@@ -27,7 +64,9 @@ function AllScores() {
         console.log('Could not fetch scores');
       }
     };
+
     if (accessToken) {
+      updateScores();
       handleScores();
     }
   }, [accessToken]);

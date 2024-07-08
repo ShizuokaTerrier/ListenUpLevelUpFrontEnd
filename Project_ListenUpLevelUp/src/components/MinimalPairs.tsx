@@ -9,7 +9,6 @@ import useAccessToken from '../custom_hooks/useAccessToken';
 const MinimalPairs = () => {
   const { user } = useAuth0();
   const email = user?.email as string;
-  const userId = user?.sub as string;
 
   const accessToken = useAccessToken();
   console.log(accessToken);
@@ -40,46 +39,13 @@ const MinimalPairs = () => {
     return Math.floor(Math.random() * 2);
   }
 
-  const updateScores = async () => {
-    if (accessToken) {
-      try {
-        const body = {
-          value: currentGameData.userScore,
-          gameId: 1,
-          userId: userId,
-        };
-        console.log('This is the body', body);
-        const response = await fetch(
-          `${import.meta.env.VITE_APP_API_SERVER_URL}scores`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${accessToken}`,
-            },
-            body: JSON.stringify(body),
-          }
-        );
-        if (!response.ok) {
-          console.error(`${response.status}`);
-        } else {
-          console.log('Successfully updated scores');
-        }
-        console.log('Update scores ran');
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
-
   function resetGame() {
-    updateScores();
     setCurrentGameData((prevState) => {
       const resetScore = 0;
       const resetClicks = 0;
       const newAnswers = arrayOfPairs.map((pair) => pair[flipACoin()]);
       const resetButtons = arrayOfPairs.map(() => false);
-      updateScores();
+
       return {
         ...prevState,
         userScore: resetScore,
@@ -215,7 +181,7 @@ const MinimalPairs = () => {
             currentGameData={currentGameData}
             resetFunction={resetGame}
           />
-          <AllScores />
+          <AllScores currentGameData={currentGameData} />
         </div>
       )}
     </>
